@@ -9,10 +9,7 @@ make
 
 ## Deploy
 ```shell
-kubectl create -f ./rbac.yaml
-kubectl create -f ./pod.yaml
-kubectl create -f ./class.yaml
-kubectl create -f ./claim.yaml
-kubectl create -f ./test-pod.yaml
+kubectl apply -f ./deploy/operator.yaml
+kubectl apply -f ./deploy/test.yaml
 timeout 30 bash -c "until kubectl get pod test-pod -o=jsonpath='{.status.phase}' | grep -E 'Succeeded|Failed'; do sleep 1; done"
 ```
